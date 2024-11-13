@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Simply-calculator</title>
+</head>
+<body>
+    <main class="calculator-container">
+        <section class="display-section">
+            <input type="text" id="display" readonly aria-label="Pantalla de la calculadora"> <!-- Utilizo readonly para que el usuario pueda ver el resultado de las operaciones, pero, no permito que el usuario interactue con los números o resultados.-->
+        </section>
+        <section class="move-section">
+            <div class="rows-buttons">
+                <button class="btn" data-value="left" aria-label="Mover a la izquierda" role="button">
+                    <i class="fa-light fa-arrow-left"></i>
+                </button>
+                <button class="btn" data-value="right" aria-label="Mover a la derecha" role="button">
+                    <i class="fa-light fa-arrow-right"></i>
+                </button>
+                <button class="btn" data-value="up" aria-label="Subir número" role="button">
+                    <i class="fa-light fa-arrow-up-9-1"></i>
+                </button>
+                <button class="btn" data-value="down" aria-label="Bajar número" role="button">
+                    <i class="fa-light fa-arrow-down-1-9"></i>
+                </button>
+            </div>
+        </section>
+        <section class="calculator-buttons">
+            <!-- Operadores matemáticos-->
+            <div class="operator-buttons">
+                <button class="btn" data-value="/" aria-label="División" role="button">
+                    <i class="fa-light fa-divide"></i>
+                </button>
+                <button class="btn" data-value="*" aria-label="Multiplicación" role="button">
+                    <i class="fa-light fa-xmark"></i>
+                </button>
+                <button class="btn" data-value="+" aria-label="Suma" role="button">
+                    <i class="fa-light fa-plus"></i>
+                </button>
+                <button class="btn" data-value="-" aria-label="Resta" role="button">
+                    <i class="fa-light fa-minus"></i>
+                </button>
+                <button class="btn" data-value="sqrt" aira-label="Raíz cuadrada" role="button">
+                    <i class="fa-light fa-square-root-variable"></i>
+                </button>
+                <button class="btn" data-value="=" aria-label="Igual" role="button">
+                    <i class="fa-light fa-equals"></i>
+                </button>
+                <button class="btn" data-value="(" aria-label="Abrir paréntesis" role="button">(</button>
+                <button class="btn" data-value=")" aria-label="Cerrar paréntesis" role="button">)</button>
+            </div>
+            <button class="btn" data-value="EXP" aria-label="Exponente" role="button">
+                <i class="fa-light fa-superscript"></i>
+            </button>
+            <button class="btn" data-value="." aria-label="Punto" role="button">.</button>
+            <!-- Funciones adicionales-->
+            <div class="additionals-functions">
+                <button class="btn" data-value="AC" aria-label="Borrar todo" role="button">
+                    <i class="fa-light fa-arrows-spin"></i>
+                </button>
+                <button class="btn" data-value="DEL" aria-label="Eliminar el último carácter" role="button">
+                    <i class="fa-light fa-backward-fast"></i>
+                </button>
+                <button class="btn" data-value="ANS" aria-label="Respuesta anterior" role="button">ANS</button>
+                <button class="btn" data-value="ONN" data-value="OFF" aria-label="Encendido" aria-label="Apagado" role="botton">
+                    <i class="fa-solid fa-power-off"></i>
+                </button>
+            </div>
+            <!-- Botones de números -->
+            <div class="number-buttons">
+                <button class="btn" data-value="0" aria-label="cero" role="button">
+                    <i class="fa-light fa-0"></i>
+                </button>
+                <button class="btn" data-value="1" aria-label="uno" role="button">
+                    <i class="fa-light fa-1"></i>
+                </button>
+                <button class="btn" data-value="2" aria-label="dos" role="button">
+                    <i class="fa-light fa-2"></i>
+                </button>
+                <button class="btn" data-value="3" aria-label="tres" role="button">
+                    <i class="fa-light fa-3"></i>
+                </button>
+                <button class="btn" data-value="4" aria-label="cuatro" role="button">
+                    <i class="fa-light fa-4"></i>
+                </button>
+                <button class="btn" data-value="5" aria-label="cinco" role="button">
+                    <i class="fa-light fa-5"></i>
+                </button>
+                <button class="btn" data-value="6" aria-label="seis" role="button">
+                    <i class="fa-light fa-6"></i>
+                </button>
+                <button class="btn" data-value="7" aria-label="siete" role="button">
+                    <i class="fa-light fa-7"></i>
+                </button>
+                <button class="btn" data-value="8" aria-label="ocho" role="button">
+                    <i class="fa-light fa-8"></i>
+                </button>
+                <button class="btn" data-value="9" aria-label="nueve" role="button">
+                    <i class="fa-light fa-9"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+<!-- Colocando el <script> al final, permite que se cargue primero el html antes que los scripts y de esta forma evitamos que JavaScript se cuelgue cargando la página. -->
+    <script src="/calculadorajs/JS/script.js"></script>
+</body>
+</html>

@@ -107,9 +107,21 @@ button:hover {
 .calculator-buttons {
     display: flex;
     flex-direction: row-reverse;
-    gap: 5px
+    gap: 5px;
 }
 
 .operators-buttons {
     display: grid;
+}
+
+/*--- Funciones adciionales ---*/
+
+.special-functions {
+    display: flex;
+    position: relative;
+    bottom: 60px;
+}
+
+.additionals-functions {
+    margin: 10px 10px;
 }

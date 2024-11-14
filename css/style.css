@@ -35,4 +35,44 @@
     transform: rotateX(165deg);
 }
 
-.display-secion {}
+/*-- Move Section --*/
+
+.move-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.rows-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+    width: 120px;
+    height: 120px;
+}
+
+.btn-right {
+    position: relative;
+    top: 41px;
+    left: 42px
+}
+
+.btn-left {
+    position: relative;
+    top: 41px;
+
+}
+
+.btn-up {
+    position: relative;
+    right: 41px;
+
+}
+
+.btn-down {
+    position: relative;
+    top: 41px;
+    left: 42px
+}

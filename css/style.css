@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+
+/*-- El contenido total de la calculadora (como objeto) --*/
+.calculator-container {
+    background-image: linear-gradient(to left, #5c5b6b, #33313c, #23232d, #1d1d27, #1d1d27, #1d1d27, #1d1d27, #1d1d27, #1d1d27, #1d1d27, #202029, #202029, #5c5b6b);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: 600px;
+    position: relative;
+    top: 80px;
+    margin: 0 auto;
+    border-radius: 30px;
+    box-shadow: 0px 10px 10px 10px rgba(61, 59, 72, 0.9);
+}
+
+/*-- La pantalla de la calculadora --*/
+
+.display-section input {
+    background-image: radial-gradient(#40696b 30%, #4a7875 20%, #4a7875, #406969 30%);
+    width: 300px;
+    height: 100px;
+    border-bottom: 14px solid #07080b;
+    border-left: 8px solid #4b4954;
+    border-right: 9px solid #5c5b6b;
+    border-top: 8px solid #2e2b32;
+    border-radius: 10px;
+    padding: 20px 20px;
+    margin: 80px 0px 40px;
+    transform: rotateX(165deg);
+}
+
+.display-secion {}

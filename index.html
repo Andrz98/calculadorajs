@@ -8,11 +8,11 @@
     <title>Simply-calculator</title>
 </head>
 <body>
-    <main class="calculator-container">
-        <section class="display-section">
+    <main class="calculator-container" id="calculator-object">
+        <section id="display-section" class="display-section">
             <input type="text" id="display" readonly aria-label="Pantalla de la calculadora"> <!-- Utilizo readonly para que el usuario pueda ver el resultado de las operaciones, pero, no permito que el usuario interactue con los números o resultados.-->
         </section>
-        <section class="move-section">
+        <section id="move-section" class="move-section">
             <div class="rows-buttons">
                 <button class="btn-left" data-value="left" aria-label="Mover a la izquierda" role="button">
                     <i class="fa-solid fa-arrow-left"></i>
@@ -29,7 +29,7 @@
             </div>
         </section>
             <!-- Funciones adicionales-->
-        <section class="special-functions">
+        <section id="special-functions" class="special-functions">
             <div class="additionals-functions">
                 <button class="btn-func" data-value="AC" aria-label="Borrar todo" role="button">
                     <i class="fa-solid fa-arrows-spin"></i>
@@ -44,7 +44,7 @@
             </div>
         </section>
         <!-- Operadores y números-->
-        <section class="calculator-buttons">
+        <section id="calculator-buttons" class="calculator-buttons">
             <!-- Botones de números -->
             <div class="number-buttons">
                 <button class="btn" data-value="0" aria-label="cero" role="button">

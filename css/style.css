@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+
 * {
     margin: 0;
     padding: 0;
@@ -45,7 +48,7 @@ button:hover {
 
 /*-- La pantalla de la calculadora --*/
 
-.display-section input {
+#display {
     background-image: radial-gradient(#40696b 30%, #4a7875 20%, #4a7875, #406969 30%);
     width: 300px;
     height: 150px;
@@ -56,7 +59,15 @@ button:hover {
     border-radius: 10px;
     padding: 20px 20px;
     margin: 80px 0px 40px;
+    resize: none;
 }
+
+textarea {
+    font-family: 'Doto';
+    font-size: 20px;
+    font-weight: bold;
+}
+
 
 /*-- Move Section --*/
 

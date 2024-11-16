@@ -2,10 +2,11 @@ const calculatorElement = document.getElementById('calculator-object')
 //Método para el botón ON/OFF y la información en el display.//
 const onOffbutton = document.querySelector('[data-value="on_off"]')
 //Método para que los botones solo funcionen con a calculadora encendida.//
-const buttons = document.querySelectorAll('[data-value="on_Off"]')
+const buttons = document.querySelectorAll('button:not([data-value="on_off"])')
+
 const display = document.getElementById('display')
 //Método para que los botones Up & Down funcionen.//
-const btnUp = document.querySelector('[data-value="Up"]')
+const btnUp = document.querySelector('[data-value="up"]')
 const btnDown = document.querySelector('[data-value="down"]')
 //Método para que los boones left & Right funcionen.//
 const btnRight = document.querySelector('[data-value="right"]')
@@ -72,11 +73,27 @@ btnUp.addEventListener('click', () => {
 
 //función cursorPosition Right & Left.//
 
-btnRight.addEventListener('click', () => {
-    if (encendido && display.value !== '') {
+let cursorPosition = 0
 
+btnRight.addEventListener('click', () => {
+
+    if (encendida && display.value.length > 0) {
+        if (cursorPosition <
+
+            display.value.lenght) {
+            cursorPosition++
+        }
+        display.setSelectionRange(cursorPosition, cursorPosition)
     }
 })
 
+btnLeft.addEventListener('click', () => {
+    if (encendida && display.value.length > 0) {
+        if (cursorPosition > 0) {
+            cursorPosition--
+        }
+        display.setSelectionRange(cursorPosition, cursorPosition)
+    }
+})
 
 

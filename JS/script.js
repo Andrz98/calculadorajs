@@ -58,7 +58,7 @@ onOffbutton.addEventListener('click', () => {
             display.value = '';
             enPantallaCarga = false;
             buttons.forEach(button => button.disabled = false); // Y se habilitan los botones después de la pantalla de carga.
-        }, 5000);
+        }, 2000);
 
     } else {
         display.value = '';
@@ -66,33 +66,62 @@ onOffbutton.addEventListener('click', () => {
     }
 });
 
-// Función Incremento.
-btnDown.addEventListener('click', () => {
-    if (encendida && !enPantallaCarga && display.value !== '') {
-        let currentValue = parseInt(display.value);
-        if (!isNaN(currentValue)) {
-            currentValue++;
-            display.value = currentValue;
+// Función Incrementar (con botón Up).
+btnUp.addEventListener('click', () => {
+    if (encendida && !enPantallaCarga && display.value.length > 0) {
+        display.focus();  // Asegurarse de que el cursor esté enfocado en el display.
+
+        if (cursorPosition < display.value.length) {
+            // Convertir el número actual en la posición del cursor
+            let currentNumber = parseInt(display.value[cursorPosition]);
+            if (!isNaN(currentNumber)) {
+                currentNumber++;  // Incrementar el número
+                if (currentNumber > 9) currentNumber = 0; // Opcional, reinicia si sobrepasa 9
+
+                // Dividir el contenido y reemplazar el número en la posición del cursor.
+                const beforeCursor = display.value.slice(0, cursorPosition);
+                const afterCursor = display.value.slice(cursorPosition + 1);
+                display.value = beforeCursor + currentNumber + afterCursor;
+
+                // Mover el cursor a la siguiente posición
+                display.setSelectionRange(cursorPosition, cursorPosition + 1);
+            }
         }
     }
 });
 
-// Función Decremento.
-btnUp.addEventListener('click', () => {
-    if (encendida && !enPantallaCarga && display.value !== '') {
-        let currentValue = parseInt(display.value);
-        if (!isNaN(currentValue)) {
-            currentValue--;
-            display.value = currentValue;
+// Función Decrementar (con botón Down).
+btnDown.addEventListener('click', () => {
+    if (encendida && !enPantallaCarga && display.value.length > 0) {
+        display.focus();  // Asegurarse de que el cursor esté enfocado en el display.
+
+        if (cursorPosition < display.value.length) {
+            // Convertir el número actual en la posición del cursor
+            let currentNumber = parseInt(display.value[cursorPosition]);
+            if (!isNaN(currentNumber)) {
+                currentNumber--;  // Decrementar el número
+                if (currentNumber < 0) currentNumber = 9; // Opcional, reinicia si baja de 0
+
+                // Dividir el contenido y reemplazar el número en la posición del cursor.
+                const beforeCursor = display.value.slice(0, cursorPosition);
+                const afterCursor = display.value.slice(cursorPosition + 1);
+                display.value = beforeCursor + currentNumber + afterCursor;
+
+                // Mover el cursor a la siguiente posición
+                display.setSelectionRange(cursorPosition, cursorPosition + 1);
+            }
         }
     }
 });
+
 
 // Función cursorPosition Right & Left.
 let cursorPosition = 0;
 
 btnRight.addEventListener('click', () => {
     if (encendida && !enPantallaCarga && display.value.length > 0) {
+        display.focus(); // Mover el enfoque al display.
+
         if (cursorPosition < display.value.length) {
             cursorPosition++;
         }
@@ -102,12 +131,15 @@ btnRight.addEventListener('click', () => {
 
 btnLeft.addEventListener('click', () => {
     if (encendida && !enPantallaCarga && display.value.length > 0) {
+        display.focus(); // Mover el enfoque al display.
+
         if (cursorPosition > 0) {
             cursorPosition--;
         }
         display.setSelectionRange(cursorPosition, cursorPosition);
     }
 });
+
 
 // Funciones para los numbers-buttons.
 btnNumbers.forEach(button => {

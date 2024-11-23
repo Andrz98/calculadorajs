@@ -1,37 +1,41 @@
-const calculatorElement = document.getElementById('calculator-object')
-
-// Método para el botón ON/OFF y la información en el display.
-const onOffbutton = document.querySelector('[data-value="on_off"]')
-
-// Método para que los botones solo funcionen con la calculadora encendida.
-const buttons = document.querySelectorAll('button:not([data-value="on_off"])')
-
+// Display
 const display = document.getElementById('display');
+display.readOnly = true;  // Evita la edición manual del display.
 
-// Método para que los botones Up & Down funcionen.
-const btnUp = document.querySelector('[data-value="up"]')
-const btnDown = document.querySelector('[data-value="down"]')
+// Move-Section
+const btnUp = document.querySelector('[data-value="up"]');
+const btnDown = document.querySelector('[data-value="down"]');
+const btnRight = document.querySelector('[data-value="right"]');
+const btnLeft = document.querySelector('[data-value="left"]');
 
-// Método para que los botones left & right funcionen.
-const btnRight = document.querySelector('[data-value="right"]')
-const btnLeft = document.querySelector('[data-value="left"]')
+// Funciones adicionales
+const onOffbutton = document.querySelector('[data-value="on_off"]');
+const btnAC = document.querySelector('[data-value="AC"]');
+const btnDel = document.querySelector('[data-value="DEL"]');
+const btnAns = document.querySelector('[data-value="ANS"]');
+let encendida = false; // se define el estado inicial como apagado.
+let enPantallaCarga = false;
+let ultimoResultado = ''; // La variable que guardará el resultado de la última operación.
+let cursorPosition = 0;
 
-// Método para que los number-buttons funcionen.
-const btnNumbers = document.querySelectorAll('.number-buttons .btn')
+// Botón de encendido/apagado
+const buttons = document.querySelectorAll('button:not([data-value="on_off"])');
+buttons.forEach(button => button.disabled = true); // Se define el estado inicial como desactivado.
 
-// Método para botón AC.
-const btnAC = document.querySelector('[data-value="AC"]')
+// Botones de números
+const btnNumbers = document.querySelectorAll('.number-buttons .btn');
 
-//Método para botón DEL.
-const btnDel = document.querySelector('[data-value="DEL"]')
-
-// Método para el botón ANS.
-const btnAns = document.querySelector('[data-value="ANS"]')
-
-// Método para la operación de suma.
-const btnAdd = document.querySelector('[data-value="+"]')
-
-
+// Operadores matemáticos
+const btnAdd = document.querySelector('[data-value="+"]');
+const btnSubtract = document.querySelector('[data-value="-"]');
+const btnMultiply = document.querySelector('[data-value="*"]');
+const btnDivide = document.querySelector('[data-value="/"]');
+const btnExponent = document.querySelector('[data-value="exp"]');
+const btnSqrt = document.querySelector('[data-value="sqrt"]');
+const btnParenthesisOpen = document.querySelector('[data-value="("]');
+const btnParenthesisClose = document.querySelector('[data-value=")"]');
+const btnEqual = document.querySelector('[data-value="="]');
+const btnDecimal = document.querySelector('[data-value="."]');
 
 // Clase Calculator
 class Calculator {
@@ -47,39 +51,38 @@ class Calculator {
     }
 }
 
-// Se crea la instancia de la calculadora Casio, que debe de seguir los parámetros indicados en el constructor.
-const casioCalculator = new Calculator('Calculadora', 'Casio', 'FX-82MS')
+// Se crea la instancia de la calculadora Casio, que debe seguir los parámetros indicados en el constructor.
+const casioCalculator = new Calculator('Calculadora', 'Casio', 'FX-82MS');
 
-// Programación del display de la calculadora.
 // Encendido y apagado de la calculadora y la visualización de la información en el display.
-
-let encendida = false; // se define el estado inicial como apagado.
-let enPantallaCarga = false;
-
-buttons.forEach(button => button.disabled = true) // Se define el estado inicial como desactivado.
-
 onOffbutton.addEventListener('click', () => {
     encendida = !encendida;
 
     if (encendida) {
-        display.value = casioCalculator.getInfo()
+        display.value = casioCalculator.getInfo();
         enPantallaCarga = true;
 
-        buttons.forEach(button => button.disabled = true)
+        buttons.forEach(button => button.disabled = true);
 
-        // Para que no se solapen los parámetros del constructor con las operaciones, se limpiará el display después de 5000 milisegundos.
+        // Para que no se solapen los parámetros del constructor con las operaciones, se limpiará el display después de 2000 milisegundos.
         setTimeout(() => {
-            display.value = ''
-            enPantallaCarga = false
-            buttons.forEach(button => button.disabled = false) // Y se habilitan los botones después de la pantalla de carga.
+            display.value = '';
+            enPantallaCarga = false;
+            buttons.forEach(button => button.disabled = false); // Y se habilitan los botones después de la pantalla de carga.
         }, 2000);
 
     } else {
         display.value = '';
-        buttons.forEach(button => button.disabled = true)
+        buttons.forEach(button => button.disabled = true);
     }
 });
 
+// Función para determinar si un carácter es un operador.
+function esOperador(char) {
+    return ['+', '-', '*', '/', '^'].includes(char);
+}
+
+// Funciones de movimiento
 // Función Incrementar (con botón Up).
 btnUp.addEventListener('click', () => {
     if (encendida && !enPantallaCarga && display.value.length > 0) {
@@ -130,7 +133,6 @@ btnDown.addEventListener('click', () => {
 
 
 // Función cursorPosition Right & Left.
-let cursorPosition = 0;
 
 btnRight.addEventListener('click', () => {
     if (encendida && !enPantallaCarga && display.value.length > 0) {
@@ -154,84 +156,139 @@ btnLeft.addEventListener('click', () => {
     }
 });
 
+// Funcionalidades adicionales
+btnAC.addEventListener('click', () => {
+    if (encendida && !enPantallaCarga) {
+        display.value = '';
+        cursorPosition = 0;
+    }
+});
 
-// Funciones para los numbers-buttons.
+btnDel.addEventListener('click', () => {
+    if (encendida && !enPantallaCarga) {
+        display.value = display.value.slice(0, -1);
+        cursorPosition = display.value.length;
+        display.setSelectionRange(cursorPosition, cursorPosition);
+    }
+});
+
+btnAns.addEventListener('click', () => {
+    if (encendida && !enPantallaCarga && ultimoResultado.length > 0) {
+        display.value += ultimoResultado;
+        cursorPosition = display.value.length;
+        display.setSelectionRange(cursorPosition, cursorPosition);
+    }
+});
+
+// Funciones para los números
 btnNumbers.forEach(button => {
     button.addEventListener('click', () => {
         if (encendida && !enPantallaCarga) {
-            display.value += button.getAttribute('data-value')
+            display.value += button.getAttribute('data-value');
+            cursorPosition = display.value.length;
+            display.setSelectionRange(cursorPosition, cursorPosition);
         }
     });
 });
 
-//Funcionalidades adicionales (borrar todo AC).
+// Operaciones matemáticas
+const operadores = [
+    { button: btnAdd, operador: '+' },
+    { button: btnSubtract, operador: '-' },
+    { button: btnMultiply, operador: '*' },
+    { button: btnDivide, operador: '/' },
+    { button: btnExponent, operador: '^' }
+];
 
-btnAC.addEventListener('click', () => {
-    if (encendida && !enPantallaCarga) {
-        display.value = ''
-        cursorPosition = 0
-    }
-})
-
-// Funcionamiento del botón DEL.
-
-btnDel.addEventListener('click', () => {
-    if (encendida && !enPantallaCarga) {
-        display.value = display.value.slice(0, -1)
-
-        cursorPosition = display.value.length
-        display.setSelectionRange(cursorPosition, cursorPosition)
-    }
-})
-
-// Funcionamiento del boton ANS.
-
-let ultimoResultado = '' // La variable que guardará el resultado de la última operación.
-
-btnAns.addEventListener('click', () => {
-    if (encendida && !enPantallaCarga && ultimoResultado.length > 0) {
-        display.value += ultimoResultado
-
-        cursorPosition = display.value.length
-        display.setSelectionRange(cursorPosition, cursorPosition)
-    }
-})
-
-//Operadores matemáticos (suma).
-
-
-btnAdd.addEventListener('click', () => {
-    if (encendida && !enPantallaCarga) {
-        if (display.value.length === 0) {
-            return
-        } // No quiero que se permita escribir este operador si no hay números en el display.
-        const lastCharacter = display.value[display.value.length - 1]
-        if (lastCharacter === '+' || lastCharacter === '-' || lastCharacter === '*' || lastCharacter === '/') {
-            return
+operadores.forEach(({ button, operador }) => {
+    button.addEventListener('click', () => {
+        if (encendida && !enPantallaCarga) {
+            const lastCharacter = display.value.slice(-1);
+            if (esOperador(lastCharacter)) {
+                display.value = display.value.slice(0, -1) + ` ${operador} `;
+            } else if (display.value.length > 0) {
+                display.value += ` ${operador} `;
+            }
+            cursorPosition = display.value.length;
+            display.setSelectionRange(cursorPosition, cursorPosition);
         }
+    });
+});
 
-        if (display.value.includes('+')) {
-            const partes = display.value.split(' ')
-            if (partes.length === 3) {
-                const numero1 = parseFloat(partes[0])
-                const numero2 = parseFloat(partes[2])
-                const resultado = numero1 + numero2
-
-                display.value = `${resultado} + `
-                cursorPosition = display.value.length
-                display.setSelectionRange(cursorPosition, cursorPosition)
-                return
+// Botón de raíz cuadrada
+btnSqrt.addEventListener('click', () => {
+    if (encendida && !enPantallaCarga) {
+        if (display.value.length > 0) {
+            const numero = parseFloat(display.value);
+            if (numero >= 0) {
+                const resultado = Math.sqrt(numero);
+                display.value = resultado.toString();
+            } else {
+                display.value = 'Error';
             }
         }
-        display.value += ' + '
-        cursorPosition = display.value.length
-        display.setSelectionRange(cursorPosition, cursorPosition)
+        cursorPosition = display.value.length;
+        display.setSelectionRange(cursorPosition, cursorPosition);
     }
+});
 
-})
+// Botón de paréntesis
+btnParenthesisOpen.addEventListener('click', () => {
+    if (encendida && !enPantallaCarga) {
+        display.value += '(';
+        cursorPosition = display.value.length;
+        display.setSelectionRange(cursorPosition, cursorPosition);
+    }
+});
 
+btnParenthesisClose.addEventListener('click', () => {
+    if (encendida && !enPantallaCarga) {
+        display.value += ')';
+        cursorPosition = display.value.length;
+        display.setSelectionRange(cursorPosition, cursorPosition);
+    }
+});
 
+// Botón decimal (.)
+btnDecimal.addEventListener('click', () => {
+    if (encendida && !enPantallaCarga) {
+        const partes = display.value.split(/[\+\-\*\/\^]/);
+        const ultimaParte = partes[partes.length - 1];
 
+        if (!ultimaParte.includes('.')) {
+            display.value += '.';
+            cursorPosition = display.value.length;
+            display.setSelectionRange(cursorPosition, cursorPosition);
+        }
+    }
+});
 
+// Botón igual
+btnEqual.addEventListener('click', () => {
+    if (encendida && !enPantallaCarga) {
+        try {
+            const displayValue = display.value.replace(/\s/g, '');
 
+            const resultado = evaluateExpression(displayValue);
 
+            if (resultado === Infinity || isNaN(resultado)) {
+                display.value = 'Error';
+            } else {
+                display.value = resultado.toString();
+            }
+
+            cursorPosition = display.value.length;
+            display.setSelectionRange(cursorPosition, cursorPosition);
+            ultimoResultado = display.value;
+
+        } catch (error) {
+            display.value = 'Error';
+            cursorPosition = display.value.length;
+            display.setSelectionRange(cursorPosition, cursorPosition);
+        }
+    }
+});
+
+function evaluateExpression(expression) {
+    return Function('"use strict";return (' + expression + ')')();
+}

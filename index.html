@@ -9,9 +9,11 @@
 </head>
 <body>
     <main class="calculator-container" id="calculator-object">
+        <!-- Display -->
         <section id="display-section" class="display-section">
             <textarea id="display" aria-label="Pantalla de la calculadora"></textarea>
         </section>
+        <!-- Move-Section-->
         <section id="move-section" class="move-section">
             <div class="rows-buttons">
                 <button class="btn-left" data-value="left" aria-label="Mover a la izquierda" role="button">
@@ -28,7 +30,7 @@
                 </button>
             </div>
         </section>
-            <!-- Funciones adicionales-->
+        <!-- Funciones adicionales-->
         <section id="special-functions" class="special-functions">
             <div class="additionals-functions">
                 <button class="btn-func" data-value="AC" aria-label="Borrar todo" role="button">
@@ -38,7 +40,7 @@
                 <button class="btn-func" data-value="DEL" aria-label="Eliminar el último carácter" role="button">
                     <i class="fa-solid fa-backward-fast"></i>
                 </button>
-                <button class="btn-func" data-value="on_off" aria-label="Encendido/Apagado" role="botton">
+                <button class="btn-func" data-value="on_off" aria-label="Encendido/Apagado" role="button">
                     <i class="fa-solid fa-power-off"></i>
                 </button>
             </div>
@@ -100,7 +102,7 @@
                 </button>
                 <button class="btn-pha" data-value="(" aria-label="Abrir paréntesis" role="button">(</button>
                 <button class="btn-pha" data-value=")" aria-label="Cerrar paréntesis" role="button">)</button>
-                <button class="btn-exp" data-value="EXP" aria-label="Exponente" role="button">
+                <button class="btn-exp" data-value="exp" aria-label="Exponente" role="button">
                     <i class="fa-solid fa-superscript"></i>
                 </button>
                 <button class="btn-pnt" data-value="." aria-label="Punto" role="button">.</button>
@@ -108,6 +110,6 @@
         </section>
     </main>
 <!-- Colocando el <script> al final, permite que se cargue primero el html antes que los scripts y de esta forma evitamos que JavaScript se cuelgue cargando la página. -->
-    <script src="/calculadorajs/JS/script.js"></script>
+    <script src="JS/script.js"></script>
 </body>
 </html>
